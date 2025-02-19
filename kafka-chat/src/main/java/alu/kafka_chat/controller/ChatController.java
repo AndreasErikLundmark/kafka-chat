@@ -16,15 +16,12 @@ import org.springframework.web.bind.annotation.*;
 public class ChatController {
 
     private final KafkaTemplate<String, String> template;
-//    private final ObjectMapper mapper;
+
     public ChatController(KafkaTemplate<String, String> template) {
         this.template = template;
     }
 
-//    public ChatController(KafkaTemplate<String, String> template) {
-//        this.template = template;
-//        mapper = new ObjectMapper();
-//    }
+
 
     @PostMapping
     public ResponseEntity<String> sendMsg(@RequestParam String topic, @RequestParam String msg) {
