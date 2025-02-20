@@ -15,13 +15,6 @@ public class ProducerApplication {
 		SpringApplication.run(ProducerApplication.class, args);
 	}
 
-	@Bean
-	public NewTopic topic() {
-		return TopicBuilder.name("test-topic")
-				.partitions(10)
-				.replicas(1)
-				.build();
-	}
 
 	@Bean
 	public ApplicationRunner runner(KafkaTemplate<String, String> template) {

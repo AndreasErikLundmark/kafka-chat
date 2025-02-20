@@ -22,13 +22,11 @@ public class ChatController {
     }
 
 
-
+//    http://localhost:8081/chat?topic=test-topic&msg=Hello Kafka is working cool!
     @PostMapping
     public ResponseEntity<String> sendMsg(@RequestParam String topic, @RequestParam String msg) {
         template.send(topic, msg);
-
         return ResponseEntity.status(HttpStatus.OK).body("Sent message: " + msg);
-
     }
 
 }
