@@ -7,6 +7,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Set;
+import java.util.concurrent.ExecutionException;
+
 
 /**
  * Producer
@@ -23,8 +27,7 @@ public class ChatController {
         this.template = template;
         this.topicService = topicService;
     }
-
-
+    
 //    http://localhost:8081/chat?topic=test-topic&msg=Hello Kafka is working cool!
     @PostMapping
     public ResponseEntity<String> sendMsg(@RequestParam String topic, @RequestParam String msg) {
@@ -32,13 +35,28 @@ public class ChatController {
         return ResponseEntity.status(HttpStatus.OK).body("Sent message: " + msg);
     }
 
+//    http://localhost:8081/chat/newTopic?topic=newTopicName
     @PostMapping("/newTopic")
     public ResponseEntity<String> newTopic(@RequestParam String topic) {
-        if(topicService.createTopic(topic)!=null) {
-            return ResponseEntity.status(HttpStatus.OK).body("New topic: " + topic);
-        }
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to create topic: " + topic);
 
+        if(topicService.createTopic(topic)) {
+            return ResponseEntity.status(HttpStatus.OK).body("New topic: " + topic);
+        }else{
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to create topic: " + topic);
+        }
+    }
+
+//  http://localhost:8081/chat/getTopics
+    @GetMapping("/getTopics")
+    public ResponseEntity <Set<String>> getTopics() {
+
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(topicService.getAllTopics());
+        } catch (ExecutionException e) {
+            throw new RuntimeException(e);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }
