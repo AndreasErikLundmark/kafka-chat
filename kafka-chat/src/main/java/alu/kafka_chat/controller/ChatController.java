@@ -27,7 +27,7 @@ public class ChatController {
         this.template = template;
         this.topicService = topicService;
     }
-    
+
 //    http://localhost:8081/chat?topic=test-topic&msg=Hello Kafka is working cool!
     @PostMapping
     public ResponseEntity<String> sendMsg(@RequestParam String topic, @RequestParam String msg) {
