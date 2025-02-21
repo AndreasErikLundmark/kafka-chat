@@ -28,8 +28,6 @@ public class KafkaConfig {
         return AdminClient.create(kafkaAdmin.getConfigurationProperties());
     }
 
-
-
     @Bean
     public NewTopic topic() {
         return TopicBuilder.name("test-topic")
