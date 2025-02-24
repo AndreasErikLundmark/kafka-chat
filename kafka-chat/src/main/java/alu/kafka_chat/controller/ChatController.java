@@ -1,14 +1,10 @@
 package alu.kafka_chat.controller;
 
 import alu.kafka_chat.Service.TopicService;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.apache.kafka.clients.admin.NewTopic;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ExecutionException;
 
@@ -29,14 +25,14 @@ public class ChatController {
         this.topicService = topicService;
     }
 
-    //    http://localhost:8081/chat?topic=test-topic&msg=Hello Kafka is working cool!
+    //    base_url/chat?topic=test-topic&msg=Hello Kafka is working cool!
     @PostMapping
     public ResponseEntity<String> sendMsg(@RequestParam String topic, @RequestParam String msg) {
         template.send(topic, msg);
         return ResponseEntity.status(HttpStatus.OK).body("Sent message: " + msg);
     }
 
-    //    http://localhost:8081/chat/newTopic?topic=newTopicName
+    //    base_url/chat/newTopic?topic=newTopicName
     @PostMapping("/newTopic")
     public ResponseEntity<String> newTopic(@RequestParam String topic) {
 
@@ -47,7 +43,7 @@ public class ChatController {
         }
     }
 
-    //  http://localhost:8081/chat/getTopics
+    //  base_url/chat/getTopics
     @GetMapping("/getTopics")
     public ResponseEntity<Set<String>> getTopics() {
 
@@ -59,15 +55,5 @@ public class ChatController {
             throw new RuntimeException(e);
         }
     }
-//
-//    @PostMapping("/newSubTopic")
-//    public ResponseEntity<String> createSubtopic(@RequestParam String mainTopic, @RequestParam String subTopic) {
-//        String fullTopic = mainTopic + "." + subTopic;
-//        topicService.createTopic(fullTopic);
-//        System.out.println("adding topic: " + fullTopic);
-////        kafkaAdmin.createOrModifyTopics(new NewTopic(fullTopic, 3, (short) 1));
-//        return ResponseEntity.ok("Created topic: " + fullTopic);
-//    }
-
 }
 

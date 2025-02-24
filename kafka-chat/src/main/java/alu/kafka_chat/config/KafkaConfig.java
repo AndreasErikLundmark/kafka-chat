@@ -1,6 +1,5 @@
 package alu.kafka_chat.config;
 
-import alu.kafka_chat.Service.TopicService;
 import org.apache.kafka.clients.admin.AdminClient;
 import org.apache.kafka.clients.admin.AdminClientConfig;
 import org.apache.kafka.clients.admin.NewTopic;
