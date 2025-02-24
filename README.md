@@ -9,9 +9,12 @@ https://kafka.apache.org/documentation/#quickstart_download
 5. Start server port 9092: bin/kafka-server-start.sh config/kraft/server.properties
 
 #See that it works.... 
+
 6. Create a "test-topic": bin/kafka-topics.sh --create --topic test-topic --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1
+
 7. Start producer: bin/kafka-console-producer.sh --topic test-topic --bootstrap-server localhost:9092
-8. Start consumer: bin/kafka-console-consumer.sh --topic test-topic --from-beginning --bootstrap-server localhost:9092
+   
+9. Start consumer: bin/kafka-console-consumer.sh --topic test-topic --from-beginning --bootstrap-server localhost:9092
 
 ---------------------------------------------------------------------------------
 
