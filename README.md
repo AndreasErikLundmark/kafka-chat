@@ -34,7 +34,7 @@ https://docs.spring.io/spring-kafka/reference/introduction.html
 2. Get current topics in kafka: base_url/chat/getTopics
  
 # Important
-Before sending a message a new listener for the topic just created needs to be created.
+Before sending a message a new listener for the topic just created needs to be created in the consumer.
 
 5. A way to do this under runtime is to call the consumer endpoint: 
 base_url/createTopicListener?topic=[TopicName]
