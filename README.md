@@ -22,23 +22,23 @@ https://docs.spring.io/spring-kafka/reference/introduction.html
 1. Spring initialzr -> maven -> kafka and web dependencies
 ---------------------------------------------------------------------------------
 
-Launch
-1.Start the consumer backend ( https://github.com/AndreasErikLundmark/kafka-chat-consumer )
+# Launch
+1. Start the consumer backend ( https://github.com/AndreasErikLundmark/kafka-chat-consumer )
 1.2 ( Postgres database url need to be added in a secret.yml )
 
 2. and then the producer backend (this)
 
 
-Producer endpoints:
+# Producer endpoints:
 1. Create a new topic: base_url/chat/newTopic?topic=[newTopicName]
 2. Get current topics in kafka: base_url/chat/getTopics
  
-#Important
+# Important
 Before sending a message a new listener for the topic just created needs to be created.
 
 5. A way to do this under runtime is to call the consumer endpoint: 
 base_url/createTopicListener?topic=[TopicName]
 
-#Finally
+# Finally
 5. Send message to consumer: base_url/chat?topic=[TopicName]&msg=Hello Kafka is working cool!
 
